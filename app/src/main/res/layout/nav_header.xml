@@ -2,10 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_marginTop="50dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="bottom"
+    android:paddingTop="?attr/actionBarSize"
+    android:gravity="start"
     android:padding="16dp"
     android:background="@color/white"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
