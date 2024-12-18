@@ -5,4 +5,6 @@
     <color name="primarybg">#f2922a</color>
     <color name="secondarybg">#FBF7F4</color>
     <color name="primarytext">#F4F9FB</color>
+    <color name="gradient_start">#FF5733</color>
+    <color name="gradient_end">#900C3F</color>
 </resources>
