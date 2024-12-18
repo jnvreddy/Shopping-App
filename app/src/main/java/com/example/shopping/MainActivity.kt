@@ -1,24 +1,21 @@
 package com.example.shopping
 
-import ImageSliderAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.viewpager2.widget.ViewPager2
+import androidx.fragment.app.Fragment
+import com.example.shopping.Fragments.CartFragment
+import com.example.shopping.Fragments.HomeFragment
+import com.example.shopping.Fragments.SettingsFragment
 import com.example.shopping.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit  var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,55 +23,74 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
 
-        binding.toolbar.ivBurgerMenu.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+        // Set toolbar menu button functionality
+//        binding.toolbar.ivBurgerMenu.setOnClickListener {
+//            drawerLayout.openDrawer(GravityCompat.START)
+//        }
 
+        // Set up navigation item click listener
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_home -> {
-                    // Handle Home button click
-                    Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show()
+                    replaceFragment(HomeFragment())
+                    binding.bottomNavigation.selectedItemId = R.id.nav_home
                 }
 
                 R.id.nav_settings -> {
-                    // Handle Settings button click
+                    replaceFragment(SettingsFragment())
+                    binding.bottomNavigation.selectedItemId = R.id.nav_settings
                     Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
                 }
 
-                R.id.nav_share -> {
-                    // Handle Share button click
-                    Toast.makeText(this, "Share clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_cart -> {
+                    replaceFragment(CartFragment())
+                    binding.bottomNavigation.selectedItemId = R.id.nav_cart
+                    Toast.makeText(this, "Cart Selected", Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.nav_logout -> {
-                    // Handle Logout button click
                     Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
-
                 }
             }
-
-            // Close the navigation drawer after an item is selected
             drawerLayout.closeDrawers()
             true
         }
 
+        // Set default fragment (Home)
+        if (savedInstanceState == null) {
+            replaceFragment(HomeFragment())
+            binding.bottomNavigation.selectedItemId = R.id.nav_home
+        }
 
-        val images = listOf(
-            R.drawable.homeapp,
-            R.drawable.grocery,
-            R.drawable.electronic,
-            R.drawable.clothing
-        )
+        // Handle Bottom Navigation clicks
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_cart -> {
+                    replaceFragment(CartFragment())
+                    true
+                }
 
-        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
-        val adapter = ImageSliderAdapter(images)
+                R.id.nav_home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
 
-        viewPager.adapter = adapter
+                R.id.nav_settings -> {
+                    replaceFragment(SettingsFragment())
+                    true
+                }
 
+                else -> false
+            }
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }

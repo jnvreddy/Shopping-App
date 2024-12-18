@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="primarybg">#f2922a</color>
-    <color name="secondarybg">#FBF7F4</color>
-    <color name="primarytext">#F4F9FB</color>
-    <color name="gradient_start">#FF5733</color>
+    <color name="white">#FBF4F4</color>
+    <color name="primarybg">#ff2121</color>
+    <color name="secondarybg">#FBF4F4</color>
+    <color name="primarytext">#FBF4F4</color>
+    <color name="gradient_start">#ff2121</color>
     <color name="gradient_end">#900C3F</color>
+    <color name="bottom_nav_icon_color">#FBF4F4</color>
+    <color name="bottom_nav_icon_color_unselected">#ff2121</color>
+    <color name="bottom_nav_text_color">#FBF4F4</color>
+    <color name="bottom_nav_text_color_unselected">#ff2121</color>
 </resources>

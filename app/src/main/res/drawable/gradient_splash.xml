@@ -5,9 +5,9 @@
         <shape android:shape="rectangle">
             <!-- res/drawable/splash_gradient.xml -->
             <gradient
-                android:startColor="#FF5733"
-                android:endColor="#900C3F"
-                 android:angle="60"/>
+                android:startColor="#EC5050"
+                android:endColor="#DF2B1F"
+                 android:angle="50"/>
 
         </shape>
     </item>
